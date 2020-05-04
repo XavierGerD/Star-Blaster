@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 var bulletSpeed = Vector2()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	bulletSpeed.y = -1000
 

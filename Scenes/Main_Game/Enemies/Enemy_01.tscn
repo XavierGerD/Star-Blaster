@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Sprites/enemyExplode1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/EnemyShip01.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/enemyExplode2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/enemyExplode3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/enemyExplode4.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/EnemyShip01_flash.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Main_Game/Enemies/Enemy_01.gd" type="Script" id=7]
+[ext_resource path="res://Audio/SFX/enemyHit.ogg" type="AudioStream" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "explode",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 28.0
+
+[node name="Enemy_01" type="KinematicBody2D"]
+script = ExtResource( 7 )
+
+[node name="Enemy01Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2.5, 2.5 )
+frames = SubResource( 1 )
+animation = "explode"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
+
+[node name="EnemyHitAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -11.107
+[connection signal="animation_finished" from="Enemy01Sprite" to="." method="_on_Enemy01Sprite_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

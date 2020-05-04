@@ -124,9 +124,10 @@ __meta__ = {
 
 [node name="LogoTween" type="Tween" parent="Label"]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-autoplay = true
+
+[node name="MusicFadeoutTween" type="Tween" parent="MainMenuMusic"]
 
 [node name="Mask" type="Light2D" parent="."]
 position = Vector2( 0, -1520 )
